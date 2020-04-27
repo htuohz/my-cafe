@@ -14,22 +14,21 @@ export class CartComponent implements OnInit {
   private eventsSubscription: Subscription;
   @Input() events: Observable<void>;
 
-  totalSum = 0;
+
+  @Output() totalSum = 0;
   @Input() items: CartItem[];
   @Output() itemAdded = new EventEmitter();
+  @Output() itemSubtracted = new EventEmitter();
+
   addItemToCart(product) {
     this.itemAdded.emit(product);
   }
   removeFromCart(i){
-    this.items[i].count--;
-    if(this.items[i].count<1)
-    {
-      this.items.splice(i);
-    }
-    this.items[i].total = this.items[i].item.price * this.items[i].count;
-    this.updateSum();
+    this.itemSubtracted.emit(i);
+
  
   }
+
 
   trackByFn(index,item)
   {
@@ -38,9 +37,13 @@ export class CartComponent implements OnInit {
   updateSum()
   {
     this.totalSum = 0;
-    this.items.forEach(element => {
-      this.totalSum = this.totalSum + element.total;
-    });
+    if(this.items.length>0)
+    {
+      this.items.forEach(element => {
+        this.totalSum = this.totalSum + element.total;
+      });
+    }
+
   }
   
 

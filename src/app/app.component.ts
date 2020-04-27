@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuComponent, Item } from './menu/menu.component';
 import { CartItem } from './cart/cart.component';
 import { Subject } from 'rxjs';
 
@@ -15,6 +14,7 @@ import { Subject } from 'rxjs';
 export class AppComponent {
   title = 'my-cafe';
   items: CartItem[] = [];
+  totalSum: number;
   eventsSubject: Subject<void> = new Subject<void>();
 
   addToCart(product) {
@@ -35,36 +35,44 @@ export class AppComponent {
           this.items[i].count = this.items[i].count + 1;
           this.items[i].total = this.items[i].item.price * this.items[i].count;
           this.eventsSubject.next();
+          this.getTotalSum();
           return;
         }
-        
+      
         
       }
       this.items.push(new CartItem(product,1));
-      this.items[this.items.length].total = this.items[this.items.length].item.price * this.items[this.items.length].count;
+      this.items[this.items.length-1].total = this.items[this.items.length-1].item.price * this.items[this.items.length-1].count;
       this.eventsSubject.next();
     }
-   
+    this.getTotalSum();
 
   }
-
+  subtractFromCart(i){
+    this.items[i].count--;
+    if(this.items[i].count<1)
+    {
+      this.items.splice(i,1);      
+    }
+    else
+    {
+      this.items[i].total = this.items[i].item.price * this.items[i].count;
+    }
+    this.getTotalSum();
+    this.eventsSubject.next();
+  }
   
+  getTotalSum(){
+    this.totalSum = 0;
+    this.items.forEach(element => {
+      
+      this.totalSum = this.totalSum+element.total;
+    });
+  }
 }
 
 
 
   
 
-// class CartItem {
-//   item: Item;
-//   count: number;
-//   total = this.item.price * this.count;
-  
 
-
-// constructor(_item: Item, _count: number) {
-//   this.item = _item;
-//   this.count = _count;
-
-// }
-// }

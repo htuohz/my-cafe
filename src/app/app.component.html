@@ -38,8 +38,8 @@
 </header>
 <script src="./my-cafe.js"></script>
 
-<app-cart [items]="items" (itemAdded)="addToCart($event)" [events]="eventsSubject.asObservable()"></app-cart>
+<app-cart [items]="items" (itemAdded)="addToCart($event)" [events]="eventsSubject.asObservable()" (itemSubtracted)="subtractFromCart($event)"></app-cart>
 <app-menu (itemAdded)="addToCart($event)"></app-menu> 
-
+<app-order [items]="items" [totalSum]="totalSum"></app-order>
 
 <router-outlet ></router-outlet>
