@@ -1,0 +1,37 @@
+
+<div class="modal fade" id="cart" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="show-cart table" >
+          <tr *ngFor="let item of items; let i=index; trackBy: trackByFn">
+            <td>{{item.item.name}}</td>
+            <td>{{item.item.price}}</td>
+            <td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name={{item.item.name}} (click)="removeFromCart(i)">-</button>
+            <input type='number' class='item-count form-control' data-name={{item.item.name}} value={{item.count}}>
+            <button class='plus-item btn btn-primary input-group-addon' data-name={{item.item.name}} (click)="addItemToCart(item.item)">+</button></div></td>
+            <td><button class='btn btn-danger' data-name={{item.item.name}}>X</button></td>
+             = 
+            <td>{{item.total}}</td>
+            </tr>
+
+        </table>
+        <ul>
+          
+        </ul>
+        <div>Total price:{{totalSum}} $<span class="total-cart"></span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Place order</button>
+      </div>
+    </div>
+  </div>
+</div> 
+

@@ -1,0 +1,15 @@
+<div class="container" >
+  <div class="row row-content align-items-center">
+    <div class="card" style="width: 18rem;" *ngFor="let item of menuItems">
+      <img class="card-img-top" src={{item.url}} alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}} <span class="badge badge-pill badge-secondary">${{item.price}}</span></h5>
+        <p class="card-text">{{item.description}}</p>
+        <!-- <button class="btn btn-primary" (click)="addClicked($event, item)">Add to cart</button> -->
+        <button class="btn btn-primary" (click)="addItemToCart(item)">Add to cart</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

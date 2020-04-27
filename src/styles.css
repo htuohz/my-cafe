@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.row-header {
+    margin: 0px auto;
+    padding: 0px 0px; 
+}
+  
+.row-content {
+margin: 0px auto;
+padding: 50px 0px;
+border-bottom: 1px ridge;
+min-height: 400px; 
+}
+
+body {
+    padding: 50px 0px 0px 0px;
+    z-index: 0; 
+}
+  
+.navbar-dark {
+    background-color: #ffbbaa; 
+}
+  
+
